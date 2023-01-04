@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <link rel="stylesheet" href="/css/style.css" /> -->
+    <!-- <script src="/js/app.js"></script> -->
+    <style>
+      body {
+        background-color: antiquewhite;
+      }
+      .container {
+        display: flex;
+        justify-content: center;
+      }
+      .row {
+        display: flex;
+        flex-direction: column;
+      }
+      .pixel {
+        border: 1px solid red;
+        height: 20px;
+        width: 20px;
+      }
+    </style>
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let size = 0;
+      const body = document.getElementsByTagName("body")[0];
+      const input = document.createElement("input");
+      input.placeholder = "Enter your desired size";
+      input.type = "number";
+      input.addEventListener("change", (e) => {
+        size = e.target.value;
+      });
+      const btn = document.createElement("button");
+      btn.innerHTML = "create";
+      btn.type = "submit";
+      body.appendChild(input);
+      body.appendChild(btn);
+      const drawPad = () => {
+        container.innerHTML = "";
+        sketch(size);
+      };
+
+      btn.addEventListener("click", drawPad);
+
+      const container = document.createElement("div");
+
+      container.classList = "container";
+
+      const sketch = (size) => {
+        for (let i = 0; i < size; i++) {
+          const row = document.createElement("div");
+          row.classList = "row";
+          container.appendChild(row);
+          for (let i = 0; i < size; i++) {
+            const pixel = document.createElement("div");
+            pixel.classList = "pixel";
+            const paint = () => {
+              pixel.style.backgroundColor = "black";
+            };
+            pixel.addEventListener("mouseover", paint);
+            row.appendChild(pixel);
+          }
+        }
+      };
+      body.appendChild(container);
+      sketch(16);
+    </script>
+  </body>
+</html>
