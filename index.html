@@ -10,6 +10,14 @@
       body {
         background-color: antiquewhite;
       }
+      .header {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin: 40px;
+      }
       .container {
         display: flex;
         justify-content: center;
@@ -19,9 +27,9 @@
         flex-direction: column;
       }
       .pixel {
-        border: 1px solid red;
         height: 20px;
         width: 20px;
+        border: 1px solid red;
       }
     </style>
     <title>Document</title>
@@ -29,6 +37,8 @@
   <body>
     <script>
       let size = 0;
+      const header = document.createElement("div");
+      header.classList = "header";
       const body = document.getElementsByTagName("body")[0];
       const input = document.createElement("input");
       input.placeholder = "Enter your desired size";
@@ -39,8 +49,9 @@
       const btn = document.createElement("button");
       btn.innerHTML = "create";
       btn.type = "submit";
-      body.appendChild(input);
-      body.appendChild(btn);
+      body.appendChild(header);
+      header.appendChild(input);
+      header.appendChild(btn);
       const drawPad = () => {
         container.innerHTML = "";
         sketch(size);
@@ -53,6 +64,14 @@
       container.classList = "container";
 
       const sketch = (size) => {
+        if (size > 100) {
+          const h1 = document.createElement("h1");
+          h1.style.color = "red";
+          h1.innerHTML =
+            "you are gonna blow up the pc, max is 100".toLocaleUpperCase();
+          container.appendChild(h1);
+          return;
+        }
         for (let i = 0; i < size; i++) {
           const row = document.createElement("div");
           row.classList = "row";
